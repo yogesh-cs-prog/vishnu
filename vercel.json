@@ -5,6 +5,6 @@
     ],
     "routes": [
       { "src": "/api/admin/(.*)", "dest": "backend/router/adminRouter.js" },
-      { "src": "/(.*)", "dest": "backend/router/userRouter.js" }
+      { "src": "/(.*)", "dest": "server.js"}
     ]
 }
