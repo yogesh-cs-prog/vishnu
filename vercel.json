@@ -1,0 +1,10 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "server.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+      { "src": "/api/admin/(.*)", "dest": "backend/router/adminRouter.js" },
+      { "src": "/(.*)", "dest": "backend/router/userRouter.js" }
+    ]
+}
