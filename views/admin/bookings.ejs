@@ -30,6 +30,9 @@
   <!-- main css -->
   <link rel="stylesheet" href="../../assets/css/style.css">
     <style>
+        body{
+            overflow-x: hidden;
+        }
         .min-vw-50 {
             min-width: 25vw !important;
 
@@ -124,7 +127,7 @@
                                     class="py-12 px-16 radius-8 bg-primary-50 mb-16 d-flex align-items-center justify-content-between gap-2">
                                     <div>
 
-                                        <h6 class="text-lg text-primary-light fw-semibold mb-2">Welcome Temple,</h6>
+                                        <h6 class="text-lg text-primary-light fw-semibold mb-2">Welcome Admin,</h6>
                                         <span class="text-secondary-light fw-medium text-sm">Admin</span>
                                     </div>
                                     <button type="button" class="hover-text-danger">
@@ -156,7 +159,18 @@
 
             <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
                 <h6 class="fw-semibold mb-0">Bookings</h6>
+
                 <ul class="d-flex align-items-center gap-2">
+                    <form action="/api/admin/filterBookings" method="post" style="display: flex;flex-direction: row;align-items: center;gap: 20px;">
+                        <select class="form-select form-select-sm w-auto ps-10 py-6 radius-12 h-45-px" name="filter">
+                          <option disabled selected>Status</option>
+                          <option value="pending">pending</option>
+                          <option value="completed">completed</option>
+                      </select>
+                       
+                      <button type="submit" style="color: red; background-color: aliceblue; padding: 6px 15px 6px 15px;border: 1px solid gray;">Filter</button>
+                     
+                      </form>
                     <li class="fw-medium">
                         <a href="/" class="d-flex align-items-center gap-1 hover-text-primary">
                             <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
@@ -169,7 +183,7 @@
             </div>
 
 
-
+          <h6><%= total %> Bookings Found</h6>  
 
             <% Details.forEach((detail)=> { %>
                 <div class="d-inline-flex gap-1 mb-10" style="display: flex;">

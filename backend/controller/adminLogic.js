@@ -31,6 +31,7 @@ const addService = async(req, res) => {
 
 const bookings = async(req, res) => {
     try {
+        const total = await UserBooking.countDocuments({})
         const bookingDetails = await UserBooking.find()
         if(!bookingDetails){
             alert("No Booking details")
@@ -40,10 +41,29 @@ const bookings = async(req, res) => {
             console.log('Booking Id:', detail._id);
         });
 
-        res.render('admin/bookings', {Details : bookingDetails})
+        res.render('admin/bookings', {Details : bookingDetails, total})
 
     } catch (error) {
         console.log("Cannot fetch booking details")
+    }
+}
+
+const filter = async(req, res) => {
+    const { filter } = req.body
+    console.log('chosen filter', filter)
+
+    try {
+        const total = await UserBooking.countDocuments({status : filter})
+        const bookingDetails = await UserBooking.find({
+            status : filter
+        })
+        bookingDetails.forEach(detail => {
+            console.log('Booking Details :', detail)
+        })
+        res.render('admin/bookings', {Details : bookingDetails, total})
+
+    } catch (error) {
+        console.log(error)
     }
 }
 
@@ -179,4 +199,4 @@ const loginAdmin = async(req, res) => {
     }
   }
 
-export {addService, bookings, mainPage, add, updateStatus, confirmUpdateUser, loginAdmin}
+export {addService, bookings, mainPage, add, updateStatus, confirmUpdateUser, loginAdmin, filter}
