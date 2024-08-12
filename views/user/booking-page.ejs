@@ -108,9 +108,17 @@
         }
         .user-div a:hover{
             background-color: #d81324 !important;
-        }
-  </style>
+        }    .mob-div-list {
+                display: none;
+            }
+            .mob-div.active .mob-div-list{
+                display: block !important;
+            }
+        
+     
 
+      
+    </style>
 </head>
 
 <body>
@@ -123,7 +131,9 @@
     <!-- Spinner End -->
 
 
-   
+    <!-- Topbar Start -->
+    
+    <!-- Topbar End -->
 
 
     <!-- Navbar Start -->
@@ -147,37 +157,31 @@
 
                 
                 <% if(user) { %>
-                    <div class="nav-item dropdown">
-                        <a href="/auth/userLogin" class="nav-item nav-link">  <i class="fa-solid fa-user">&ensp;</i>  <%= user.userName %></a>
-                        <div class="dropdown-menu fade-up m-0 user-div">
-                           
-                                <form action="/totalBookings" method="post">
-                                    <% if(user) { %>
-                                        <!-- <input> -->
-                                         <input type="hidden" value="<%= user._id %>" name="userId">
-                                        <button class="user-btn dropdown-item" type="submit">Bookings</button>
-                                        
-                                    <% } %>
-                                </form>
-                            
+                    <div class="nav-item dropdown mob-div">
+                        <a href="#" class="nav-item nav-link dropdown-toggle" id="userDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa-solid fa-user">&ensp;</i> <%= user.userName %>
+                        </a>
+                        <div class="dropdown-menu mob-div-list" id="userdiv" aria-labelledby="userDropdown">
+                            <form action="/totalBookings" method="post">
+                                <% if(user) { %>
+                                    <input type="hidden" value="<%= user._id %>" name="userId">
+                                    <button class="user-btn dropdown-item" type="submit">Bookings</button>
+                                <% } %>
+                            </form>
                             <form action="/logout" method="get">
-                            
-                               
-                                    <% if(user) { %>
-                                        <button class="dropdown-item user-btn" type="submit">Logout</button>
-                                        
-                                    <% } %>
-                                </form>
-                            
-                           
+                                <% if(user) { %>
+                                    <button class="dropdown-item user-btn" type="submit">Logout</button>
+                                <% } %>
+                            </form>
                         </div>
                     </div>
                     
+                      
 
                 <% } else { %>
                     <a href="/auth/userLogin" class="nav-item nav-link">Login</a>
                     <% } %>
-            <a href="/" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Get A Quote<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="#booking" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Get A Quote<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -392,7 +396,19 @@
 
     </script> -->
 
+    <script>
 
+        document.addEventListener("DOMContentLoaded", function() {
+            const dropdownToggle = document.getElementById("userDropdown");
+            const dropdownParent = document.querySelector(".mob-div");
+        
+            dropdownToggle.addEventListener("click", function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                dropdownParent.classList.toggle("active");
+            });
+        });
+        
+                </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
